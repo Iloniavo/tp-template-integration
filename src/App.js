@@ -5,19 +5,12 @@ import { Breadcrumb } from "./components/Breadcrumb";
 import { EmployeeList } from "./components/List";
 import { Footer } from "./components/Footer";
 import { Card } from "./components/Card";
-import { faker } from "@faker-js/faker";
+import {Modal} from "./components/Modal";
 import { useState } from "react";
 
 function App() {
-  const employees = new Array(15).fill(null).map((_) => ({
-    name: faker.name.findName(),
-    position: faker.company.bsNoun(),
-    office: faker.address.cityName(),
-    age: faker.random.numeric(2),
-    startDate: new Date().toISOString().split("T")[0],
-    salary: faker.random.numeric(6),
-  }));
-
+  
+  const [ openModal , setOpenModal]  = useState(false);
   const [sidebarClass, setSidebarClass] = useState("sb-nav-fixed");
 
   function toggleSidebarClass() {
@@ -29,6 +22,8 @@ function App() {
   }
 
   return (
+    <>
+    {openModal && <Modal closeModal={setOpenModal}/> }
     <div className={sidebarClass}>
       <Navbar toggleSidebarClass={toggleSidebarClass} />
       <div id="layoutSidenav">
@@ -39,6 +34,9 @@ function App() {
           <main>
             <div className="container-fluid px-4">
               <h1 className="mt-4">Tables</h1>
+              <button className="btn btn-primary" onClick={() => {
+                setOpenModal(true);
+            }}>Add</button>
               <Breadcrumb />
               <Card>
                 DataTables is a third party plugin that is used to generate the
@@ -50,14 +48,17 @@ function App() {
                 .
               </Card>
               <Card title="DataTable Example">
-                <EmployeeList items={employees} />
+                <EmployeeList />
               </Card>
             </div>
           </main>
+
+
           <Footer />
         </div>
       </div>
-    </div>
+    </div></>
+    
   );
 }
 

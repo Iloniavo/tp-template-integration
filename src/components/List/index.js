@@ -1,8 +1,14 @@
 import "./style.css";
-
+import { Bouton } from "../Bouton";
+import { Modal } from "../Modal";
+import { useState } from "react";
+import { axios } from "axios";
 export function EmployeeList(props) {
   const { items } = props;
+  
   return (
+    <>
+    
     <div className="dataTable-wrapper dataTable-loading no-footer sortable searchable fixed-columns">
       <div className="dataTable-top">
         <div className="dataTable-dropdown">
@@ -20,12 +26,9 @@ export function EmployeeList(props) {
           </label>
         </div>
         <div className="dataTable-search">
-          <input
-            className="dataTable-input"
-            placeholder="Search..."
-            type="text"
-          />
-        </div>
+           
+         </div>
+        
       </div>
       <div className="dataTable-container">
         <table className="table-bordered">
@@ -39,16 +42,6 @@ export function EmployeeList(props) {
               <th>Salary</th>
             </tr>
           </thead>
-          <tfoot>
-            <tr>
-              <th>Name</th>
-              <th>Position</th>
-              <th>Office</th>
-              <th>Age</th>
-              <th>Start date</th>
-              <th>Salary</th>
-            </tr>
-          </tfoot>
           <tbody>
             {(items || []).map((item) => (
               <tr key={item.name}>
@@ -61,6 +54,8 @@ export function EmployeeList(props) {
               </tr>
             ))}
           </tbody>
+         
+          
         </table>
       </div>
       <div className="dataTable-bottom">
@@ -106,5 +101,8 @@ export function EmployeeList(props) {
         </nav>
       </div>
     </div>
+    </>
+    
+    
   );
 }
